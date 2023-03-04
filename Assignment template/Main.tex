@@ -21,17 +21,13 @@
 %=================================
 
 %load packages
-\usepackage{graphicx, amsmath, amssymb, tikz, hhline, titlesec, amstext, array, pgfplots, wrapfig, caption, datetime, fontenc, fancyhdr, pdflscape, csquotes}
+\usepackage{graphicx, amsmath, amssymb, tikz, hhline, titlesec, amstext, array, pgfplots, wrapfig, caption, datetime, fontenc, fancyhdr, pdflscape}
 \usepackage[tt=false]{libertine}
 \usepackage[linktocpage=true, hidelinks, pdfpagelabels]{hyperref}
 \usepackage[english]{babel}
 \usepackage[most]{tcolorbox}
 \pgfplotsset{compat=newest}
 \usepackage[margin=2cm,headheight=15pt,voffset=5pt]{geometry}
-
-%references
-\usepackage[backend=biber,style=numeric, sorting=none]{biblatex}
-\addbibresource{References.bib}
 
 %custom commands
 \newcommand{\Hrule}{\rule{\linewidth}{0.4mm}}
@@ -92,7 +88,6 @@
 \end{center}
 \end{titlepage}
 \pagenumbering{arabic}
-%\pagestyle{plain}
 
 \section{Section 1}
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -127,7 +122,8 @@ Some references~\cite{SMAD, Brown}.
 
 %references
 \addcontentsline{toc}{section}{References}
-\printbibliography
+\bibliographystyle{aiaa}
+\bibliography{References.bib}
 
 \label{Lastpage}
 \end{document}

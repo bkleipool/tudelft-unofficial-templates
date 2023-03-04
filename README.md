@@ -8,6 +8,8 @@ This repository contains unofficial TU Delft templates for reports, assignments 
 ## The Report template
 The report template is intended to be used for large design reports (20+ pages). It contains a front page with room for up to 10 authors and a mentor, as well as the title and potential subtitle of the report. The template contains a list of figures (LoF), list of tables (LoT), list of symbols (LoS) and a bibliography in the AIAA style.
 
+The `.tex` files for the chapters of the report are stored in the `\chapters` folder. When chapters are renamed or new chapters are added, the `.tex` file should be (re)named accordingly. The `\chapter{}` command is placed in the `main.tex`, *not* in the chapter file itself.
+
 ## The Assignment template
 The report template is intended to be used for smaller (individual) assignments (5-20 pages). The front matter is largely the same as the report template, except that it does not contain an LoF, LoT or LoS and the table of contents is listed on the front page.
 
