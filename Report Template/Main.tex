@@ -1,0 +1,207 @@
+%document properties
+\documentclass[a4paper, twoside, 12pt]{report}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[utf8]{inputenc}
+
+
+%=========Key info=========
+%course
+\newcommand{\coursename}{Course Name}
+\newcommand{\coursecode}{AE6969-I}
+\newcommand{\courseyear}{2022/2023}
+\newcommand{\courseinstructor}{I.N.~Structor}
+%title
+\newcommand{\docsubject}{Assignment XXX}
+\newcommand{\doctitle}{Main Report Title}
+\newcommand{\subtitle}{Subtitle}
+%people
+\newcommand{\studentyear}{2nd year Bachelor}
+\newcommand{\groupname}{A01}
+\newcommand{\groupmentor}{M.~Entor}
+\newcommand{\authors}{
+	\begin{tabular}{rlrl}
+		\textbf{Student One} & 0000001 & \textbf{Student Six} & 0000006 \\
+		\textbf{Student Two} & 0000002 & \textbf{Student Seven} & 0000007\\
+		\textbf{Student Three} & 0000003 & \textbf{Student Eight} & 0000008 \\
+		\textbf{Student Four} & 0000004 & \textbf{Student Nine} & 0000009 \\
+		\textbf{Student Five} & 0000005 & \textbf{Student Ten} & 0000010 \\
+	\end{tabular}}
+%dates
+\newcommand{\startingdate}{January 1st 2022}
+\newcommand{\completiondate}{December 30th 2022}
+%==========================
+
+
+%Preamble
+\input{Extras/Preamble}
+
+
+
+\begin{document}
+\pagestyle{plain}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+\counterwithout{equation}{chapter}
+
+%Cover page
+\input{Extras/Coverpage}
+
+%Empty page
+\pagenumbering{Roman}
+
+%Table of contents
+\phantomsection
+\vspace*{-0.5cm}
+\renewcommand{\baselinestretch}{1.40}\normalsize
+\renewcommand{\cfttoctitlefont}{\huge\scshape}
+\renewcommand{\contentsname}{\hfill Table of Contents \hfill}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\tableofcontents
+\renewcommand{\baselinestretch}{1.0}\normalsize
+
+%List of figures
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename}
+\renewcommand{\baselinestretch}{1.7}\normalsize
+\renewcommand{\cftloftitlefont}{\hfill\huge\scshape}
+\renewcommand{\listfigurename}{List of Figures}
+\renewcommand{\cftafterloftitle}{\hfill}
+\listoffigures
+\renewcommand{\baselinestretch}{1.0}\normalsize
+
+%List of tables
+\vfill
+\phantomsection
+\addcontentsline{toc}{chapter}{\listtablename}
+\renewcommand{\baselinestretch}{1.7}\normalsize
+\renewcommand{\cftlottitlefont}{\hfill\huge\scshape}
+\renewcommand{\listtablename}{List of Tables}
+\renewcommand{\cftafterlottitle}{\hfill}
+\listoftables
+\renewcommand{\baselinestretch}{1.0}\normalsize
+\vfill
+
+%List of symbols
+\newpage
+\parbox{\textwidth}{\centering\scshape\huge List of Symbols \par}
+\addcontentsline{toc}{chapter}{List of Symbols}
+\vspace{1cm}
+\begin{table}[h!]
+\centering
+\begin{tabular}{lll}
+\textbf{Symbol} & \textbf{Definition} & \textbf{Unit} \\ \hline
+$D$				& Drag & [kN] \\
+$L$				& Lift & [kN] \\
+$x,y,z$			& Cartesian coordinates & [m] \\
+$\varepsilon$	& Strain & [-] \\
+$\sigma$		& Stress & [MPa] \\
+
+\end{tabular}
+\end{table}
+
+%Exit front matter
+\newpage
+\pagenumbering{arabic}
+\cleardoublepage
+\phantomsection
+\pagestyle{fancy}
+
+%=======Main content=======
+
+\chapter*{Preface}\label{ch:Preface}
+\addcontentsline{toc}{chapter}{Preface}
+\input{Chapters/Preface}
+
+
+\chapter*{Summary}\label{ch:Summary}
+\addcontentsline{toc}{chapter}{Summary}
+\input{Chapters/Summary}
+
+
+\chapter{Introduction}\label{ch:Introduction}
+\input{Chapters/Introduction}
+
+
+\chapter{Literature study}\label{ch:Literature study}
+\input{Chapters/Literature study}
+References \cite{knuth1984, lesk1977}
+
+
+\chapter{Design}\label{ch:Design}
+\input{Chapters/Design}
+
+
+\chapter{Manufacturing}\label{ch:Manufacturing}
+\input{Chapters/Manufacturing}
+
+
+\chapter{Testing}\label{ch:Testing}
+\input{Chapters/Testing}
+
+
+\chapter{Conclusion}\label{ch:Conclusion}
+\input{Chapters/Conclusion}
+
+\newpage
+
+\appendix
+\chapter{Task distribution}
+
+\begin{python}
+import numpy as np
+
+fastener_data = np.array([
+	[0, 0, 0.1],
+	[1, 0, 0.1],
+	[0, 1, 0.1],
+	[1, 1, 0.1]
+	])	#x-coord, z-coord, area  [m],[m],[m^2]
+		#the diameter of the fastener is inferred from the hole area
+
+t_plate = 0.01 #plate thickness [m]
+
+F = np.array([0.3, 0.56,1]) #force on bearing at (0,0) [N]
+print("F =", F, "[N]")
+
+#=====================
+
+#calculate CG
+cg = np.array([0,0,0])
+tot_area = np.sum(fastener_data[:,2])
+for p in fastener_data:
+	cg = cg + np.array([p[0], 0, p[1]])*p[2]/tot_area
+print("CG =", cg, "[m]")
+
+#big moment
+M = np.cross(F,cg) #swapped r*F because cg vector is flipped
+print("M =",M, "[Nm]")
+print("".join(["="]*25))
+
+#Forces due to moments
+Ar_sq = np.sum([((p[0]-cg[0])**2 + (p[1]-cg[2])**2)*p[2] for p in fastener_data])
+F_f = F/len(fastener_data)
+F_m = np.zeros((len(fastener_data),3))
+n = 0
+for p in fastener_data:
+	F_m[n] = np.cross(M, [p[0]-cg[0], 0, p[1]-cg[2]]) * p[2]/Ar_sq
+	n += 1
+print("F_m =\n",F_m, "[N]")
+
+#Total forces
+F_tot = np.zeros((len(fastener_data),3))
+for i in range(len(fastener_data)):
+	F_tot[i] = F + F_m[i]
+print("F_tot =\n",F_tot, "[N]")
+
+Exception
+__init__
+True append
+\end{python}
+
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{aiaa}
+\bibliography{Extras/Bibliography.bib}
+
+
+\end{document}

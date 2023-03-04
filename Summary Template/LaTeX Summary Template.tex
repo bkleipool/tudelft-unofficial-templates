@@ -1,0 +1,231 @@
+%document properties
+\documentclass[a4paper, 12pt, twoside, dvipsnames]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+
+%==========key info===============
+\newcommand{\docsubject}{Lecture notes Chapter X}
+\newcommand{\doctitle}{Course Name}
+\newcommand{\coursecode}{AE6699-II}
+\newcommand{\teacher}{Dr.~T.~Eacher}
+\newcommand{\authors}{Example Author}
+%===========colors================
+\definecolor{FormulaBoxPrimary}{HTML}{F2EEED}
+\definecolor{FormulaBoxHighlight}{HTML}{4F4B4A}
+\definecolor{ExampleBoxPrimary}{HTML}{E6FCFF}
+\definecolor{ExampleBoxHighlight}{HTML}{526163}
+%=================================
+
+%load packages
+\usepackage{graphicx, amsmath, amssymb, tikz, hhline, titlesec, amstext, array, pgfplots, wrapfig, datetime, fontenc, fancyhdr, pdflscape, csquotes}
+\usepackage[tt=false]{libertine}
+\usepackage[linktocpage=true, hidelinks, pdfpagelabels]{hyperref}
+\usepackage[english]{babel}
+\usepackage[most]{tcolorbox}
+\usepackage[font={small, it}]{caption}
+\pgfplotsset{compat=newest}
+\usepackage[margin=2cm,headheight=15pt,voffset=5pt]{geometry}
+
+%references
+\usepackage[backend=biber,style=numeric, sorting=none]{biblatex}
+\addbibresource{References.bib}
+
+%headers and footers
+\fancypagestyle{plain}{%
+\fancyhf{}
+\fancyhead[OL]{\slshape \nouppercase{\doctitle, \docsubject}}
+\fancyhead[ER]{\slshape \nouppercase{\authors, \currentdate}}
+\fancyfoot[RO]{\thepage\qquad}
+\fancyfoot[LE]{\qquad\thepage}
+}
+
+%worked example boxes
+\newcounter{WE}
+\newtcolorbox{WE}{
+    colback=ExampleBoxPrimary,
+    colframe=ExampleBoxHighlight,
+    arc=0.5mm,
+    fonttitle=\bfseries,
+    title=Worked example \stepcounter{WE}\Alph{WE}}
+
+%formula boxes
+\newcounter{FO}[section]
+\newtcolorbox{FO}[1][]{
+    colback=FormulaBoxPrimary,
+    colframe=FormulaBoxHighlight,
+    arc=0.5mm,
+    top=-3mm,
+    fonttitle=\bfseries,
+    title=Formula \arabic{section}.\stepcounter{FO}\theFO\quad{#1}}
+
+%custom commands
+\newcommand{\Hrule}{\rule{\linewidth}{0.4mm}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\currentdate}{\monthname~\the\year}
+
+%custom footnotes
+\usepackage[perpage, symbol]{footmisc}
+\DefineFNsymbols*{footnotesymb}{
+{$\dagger$}
+{$\ddagger$}
+{$\S$}
+{**}
+{$\dagger\dagger$}
+{$\ddagger\ddagger$}
+{$\S\S$}
+{***}
+{$\dagger\dagger\dagger$}
+{$\ddagger\ddagger\ddagger$}
+{$\S\S\S$}
+}
+\setfnsymbol{footnotesymb}
+
+%section formats
+\titleformat{\section}
+{\LARGE\scshape}
+{\thesection}
+{1em}
+{}[\titlerule]
+\titleformat{\subsection}
+{\Large\bfseries}
+{}
+{0em}
+{}
+\titleformat{\subsubsection}
+{\large\bfseries}
+{}
+{0em}
+{}
+
+%no hyphens
+\hyphenpenalty = 5000
+
+%no paragraph indents
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt}
+
+%table of contents remove header
+\makeatletter
+\renewcommand{\tableofcontents}{%
+  \@starttoc{toc}%
+}
+\makeatother
+
+\begin{document}
+%title and subtitle
+\begin{titlepage}
+\begin{center}
+\pagenumbering{Alph}
+\vspace*{1cm}
+\Hrule
+\vspace*{0.3cm}
+\parbox{\textwidth}{\centering\scshape\fontsize{34pt}{34pt}\selectfont \doctitle \par}
+\phantom{.}\vspace*{0.5cm}\\
+\parbox{\textwidth}{\centering\fontsize{12pt}{12pt}\selectfont \docsubject. Course \texttt{\coursecode} taught by \teacher. Written in \currentdate.}
+\Hrule
+\vspace*{0.75cm}
+{\centering \emph{Written by}: \\ \textbf{\authors}}
+\vspace{\stretch{1}}
+%tableofcontents
+\begin{tcolorbox}[width=0.6\textwidth, arc=0mm, top=10pt, bottom=15pt, colback=white, colframe=black]
+    \tableofcontents
+\end{tcolorbox}
+\vspace{\stretch{3}}
+\end{center}
+\end{titlepage}
+\pagenumbering{arabic}
+\pagestyle{plain}
+
+
+\section{A section}
+
+\subsection{A subsection}
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
+
+\subsubsection{A subsubsection}
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+\begin{FO}[Green's Theorem]
+    \begin{align*}
+        \oint_{C}(L\, dx + M\, dy) = \iint_{D} \left(\frac{\partial M}{\partial x} - \frac{\partial L}{\partial y}\right) dx\, dy
+    \end{align*}
+\end{FO}
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+\begin{WE}
+    Prove $\ds\iint_0^1 \frac{1}{1-xy}dxdy = \sum_{k=1}^{\infty}\frac{1}{k^2}$
+
+    \tcblower
+
+    \begin{flalign*}
+        & \text{Because:}\qquad \sum_{n=0}^{\infty}r^n = \frac{1}{1-r} &\\
+        & \iint_0^1 \frac{1}{1-xy}dxdy = \iint_0^1 \sum_{k=0}^{\infty}(xy)^k \quad\text{and } \iint_0^1 \sum_{k=0}^{\infty}(xy)^k = \sum_{k=0}^{\infty}\iint_0^1(xy)^k dxdy \quad\text{for } xy>1 &\\
+        & = \sum_{k=0}^{\infty}\int_0^1 \left(\frac{x^k 1^{k+1}}{k+1} -\frac{x^k 0^{k+1}}{k+1}\right)dx = \sum_{k=1}^{\infty}\int_0^1 \frac{x^{k-1}}{k}dx = \sum_{k=1}^{\infty}\int_0^1 \left(\frac{1^k}{k^2}-\frac{0^k}{k^2}\right)dx = \sum_{k=1}^{\infty}\frac{1}{k^2} &
+    \end{flalign*}
+\end{WE}
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+\subsection{Another subsection}
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat.
+
+\begin{minipage}{0.49\textwidth}
+    \begin{FO}
+    \begin{align*}
+        \sum_{k=1}^{\infty}\frac{1}{k^s} = \prod_{p \text{ prime}}^{\infty}\frac{1}{1-p^{-s}}
+    \end{align*}
+    \end{FO}
+\end{minipage}
+\hfill
+\begin{minipage}{0.49\textwidth}
+    \begin{FO}
+    \begin{align*}
+        \zeta(s)=\sum_{k=1}^{\infty}\frac{1}{k^2} = \frac{\pi^2}{6}
+    \end{align*}
+    \end{FO}
+\end{minipage}
+
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\begin{WE}
+    A question
+
+    \tcblower
+
+    A genius solution
+\end{WE}
+
+
+\section{Yet another section}
+
+\label{Lastpage}
+\end{document}

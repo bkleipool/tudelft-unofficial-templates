@@ -1,0 +1,133 @@
+%document properties
+\documentclass[a4paper, 12pt, twoside, dvipsnames]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[table,xcdraw]{xcolor}
+
+%==========key info===============
+\newcommand{\docsubject}{ADSEE-II Spacecraft Assignment}
+\newcommand{\doctitle}{Aerospace Design and Systems Engineering Elements II}
+\newcommand{\coursecode}{AE2111-II}
+\newcommand{\teacher}{Dr.~A.~Cervone,  Dr.~S.~Speretta and Dr.~F.~Oliviero}
+\newcommand{\groupname}{Group XX}
+\newcommand{\authors}{
+    \begin{tabular}{rlrl}
+        \textbf{Student One} & 9000001 & \textbf{Student Six} & 0000006 \\
+        \textbf{Student Two} & 0000002 & \textbf{Student Seven} & 0000007\\
+        \textbf{Student Three} & 0000003 & \textbf{Student Eight} & 0000008 \\
+        \textbf{Student Four} & 0000004 & \textbf{Student Nine} & 0000009 \\
+        \textbf{Student Five} & 0000005 & \textbf{Student Ten} & 0000010 \\
+    \end{tabular}}
+\newcommand{\submissiondate}{October 24th 2022}
+%=================================
+
+%load packages
+\usepackage{graphicx, amsmath, amssymb, tikz, hhline, titlesec, amstext, array, pgfplots, wrapfig, caption, datetime, fontenc, fancyhdr, pdflscape, csquotes}
+\usepackage[tt=false]{libertine}
+\usepackage[linktocpage=true, hidelinks, pdfpagelabels]{hyperref}
+\usepackage[english]{babel}
+\usepackage[most]{tcolorbox}
+\pgfplotsset{compat=newest}
+\usepackage[margin=2cm,headheight=15pt,voffset=5pt]{geometry}
+
+%references
+\usepackage[backend=biber,style=numeric, sorting=none]{biblatex}
+\addbibresource{References.bib}
+
+%custom commands
+\newcommand{\Hrule}{\rule{\linewidth}{0.4mm}}
+\newcommand{\ds}{\displaystyle}
+
+%section formats
+\titleformat{\section}
+{\LARGE\scshape}
+{\thesection}
+{1em}
+{}[\titlerule]
+\titleformat{\subsection}
+{\Large\bfseries}
+{}
+{0em}
+{}
+\titleformat{\subsubsection}
+{\large\bfseries}
+{}
+{1em}
+{}
+
+%no hyphens
+\hyphenpenalty = 5000
+
+%no paragraph indents
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt}
+
+%table of contents remove header
+\makeatletter
+\renewcommand{\tableofcontents}{%
+  \@starttoc{toc}%
+}
+\makeatother
+
+\begin{document}
+%title and subtitle
+\thispagestyle{empty}
+\begin{titlepage}
+\begin{center}
+\pagenumbering{Alph}
+\vspace*{1cm}
+\Hrule
+\vspace*{0.3cm}
+\parbox{\textwidth}{\centering\scshape\fontsize{34pt}{34pt}\selectfont \doctitle \par}
+\phantom{.}\vspace*{0.5cm}\\
+\parbox{\textwidth}{\centering\fontsize{12pt}{12pt}\selectfont \docsubject, \groupname. Course \texttt{\coursecode} taught by \teacher. Submitted on \submissiondate.}
+\Hrule
+\vspace*{0.75cm}
+{\centering \emph{Written by}: \\ \authors}
+\vspace{\stretch{1}}
+%tableofcontents
+\begin{tcolorbox}[width=0.6\textwidth, arc=0mm, bottom=15pt, colback=white, colframe=black]
+    \tableofcontents
+\end{tcolorbox}
+\vspace{\stretch{3}}
+\end{center}
+\end{titlepage}
+\pagenumbering{arabic}
+%\pagestyle{plain}
+
+\section{Section 1}
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+\subsection{Subsection}
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. 
+
+\subsection{Another Subsection}
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. 
+
+\section{Section 2}
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+Some references~\cite{SMAD, Brown}.
+
+
+%references
+\addcontentsline{toc}{section}{References}
+\printbibliography
+
+\label{Lastpage}
+\end{document}

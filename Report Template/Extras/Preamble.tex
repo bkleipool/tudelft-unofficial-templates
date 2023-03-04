@@ -1,0 +1,155 @@
+%packages
+\usepackage{graphicx, titlesec, amsmath, amsfonts, amstext, tikz, pgfplots, empheq, hhline, tabularx, multirow, multicol, array, etoolbox, wrapfig, bold-extra, anyfontsize, fancyhdr, microtype}
+\usepackage[tt=false]{libertine} %font
+\usepackage{tocloft} %customisable table of contents
+\usepackage[format=plain, labelfont={small,sl}, textfont={small,sl}]{caption} %captions for figures
+\usepackage[english]{babel} %proper hyphening for words
+\usepackage[linktocpage=true, hidelinks, pdfpagelabels]{hyperref} %clickable links
+\usepackage[margin=2cm,bottom=2.1cm,headheight=15pt,headsep=15pt]{geometry} %proper page margins
+\usepackage{setspace} %spacing of document
+
+\hypersetup{pdftitle={\coursename~\docsubject~\groupname~\courseyear}} %pdf title
+\usetikzlibrary{patterns}
+\pgfplotsset{compat=newest}
+
+%headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+%\fancyhead[EL]{\slshape Part~\thechapter.~\leftmark}
+\fancyhead[OR]{\slshape \nouppercase{\coursename~\coursecode}}
+\fancyhead[EL]{\slshape \nouppercase{\docsubject}}
+\fancyfoot[LO]{\qquad\thepage}
+\fancyfoot[RE]{\thepage\qquad}
+
+%no hyphens nor widows
+\hyphenpenalty = 5000
+\widowpenalty = 5000
+
+%change spacing
+\titlespacing*{\chapter}{0pt}{0pt}{40pt}
+\setlength\parindent{0pt}
+
+%custom commands
+\newcommand{\ds}{\displaystyle}
+\newcommand{\Hrule}{\rule{\linewidth}{0.4mm}}
+\newcommand{\spchapter}[1]{{\let\clearpage\relax\chapter{#1}}}
+
+%section formatting
+\titleformat{\chapter}[frame]
+{\huge\scshape}
+{\filright\footnotesize\enspace PART \thechapter\enspace}
+{10pt}
+{\thispagestyle{fancy}}
+
+\titleformat{\section}
+{\Large\scshape}
+{\thesection}
+{1em}
+{}[\titlerule]
+
+\titleformat{\subsection}
+{\large\bfseries}
+{\thesubsection}
+{1em}
+{}
+
+%table of content customisation
+\makeatletter
+\patchcmd{\tableofcontents}{\@starttoc{toc}}{\vskip-20pt\@starttoc{toc}}{}{}
+\patchcmd{\listoffigures}{\@starttoc{lof}}{\vskip-20pt\@starttoc{lof}}{}{}
+\patchcmd{\listoftables}{\@starttoc{lot}}{\vskip-20pt\@starttoc{lot}}{}{}
+\makeatother
+
+%custom footnotes
+\usepackage[perpage, symbol]{footmisc}
+\DefineFNsymbols*{footnotesymb}{
+{$\dagger$}
+{$\ddagger$}
+{$\S$}
+{**}
+{$\dagger\dagger$}
+{$\ddagger\ddagger$}
+{$\S\S$}
+{***}
+{$\dagger\dagger\dagger$}
+{$\ddagger\ddagger\ddagger$}
+{$\S\S\S$}
+}
+\setfnsymbol{footnotesymb}
+
+
+
+%python code listing
+\usepackage{listings}
+
+\definecolor{gray}{gray}{0.5}
+\definecolor{commentcolour}{HTML}{74705C}
+\definecolor{stringcolour}{HTML}{DF5417}
+\definecolor{exceptioncolour}{HTML}{E02618}
+\definecolor{commandcolour}{HTML}{006699}
+\definecolor{numpycolour}{HTML}{006699}
+\definecolor{numbercolour}{HTML}{7F007F}
+\definecolor{specmethodcolour}{HTML}{007F00}
+\definecolor{keywordcolour}{HTML}{F92468}
+\definecolor{literatecolour}{HTML}{F92468}
+\newcommand*{\literatecolour}{\textcolor{literatecolour}}
+
+\lstdefinestyle{mypython}{
+language=python,
+showtabs=true,
+numbers=left,
+numberstyle=\scriptsize\color{black!60},
+stepnumber=1,
+tab=,
+tabsize=2,
+basicstyle=\ttfamily\footnotesize\setstretch{.9},
+stringstyle=\color{stringcolour},
+showstringspaces=false,
+%
+alsoletter={1234567890},
+keywordstyle=\color{keywordcolour}\bfseries,
+emph={as,and,break,class,continue,def,yield,del,elif,else,except,exec,finally,for,from,global,if,import,in,lambda,not,or,pass,print,raise,return,try,while,assert,with},
+emphstyle=\color{blue}\bfseries,
+%
+emph={[2]0,1,2,3,4,5,6,7,8,9 True, False, None},
+emphstyle=[2]\color{numbercolour},
+%
+emph={[3]object,type,isinstance,copy,deepcopy,zip,enumerate,reversed,list,set,len,dict,tuple,xrange,append,execfile,real,imag,reduce,str,repr},
+emphstyle=[3]\color{commandcolour},
+%
+emph={Exception,NameError,IndexError,SyntaxError,TypeError,ValueError,OverflowError,ZeroDivisionError},
+emphstyle=\color{exceptioncolour}\bfseries,
+%
+morecomment=[s]{"""}{"""},
+commentstyle=\color{commentcolour}\slshape,
+%
+emph={[4]ode, fsolve, sqrt, exp, sin, cos,arctan, arctan2, arccos, pi, array, norm, solve, dot, arange, isscalar, max, sum, flatten, shape, reshape, find, any, all, abs, plot, linspace, legend, quad, polyval,polyfit, hstack, concatenate,vstack,column_stack,empty,zeros,ones,rand,vander,grid,pcolor,eig,eigs,eigvals,svd,qr,tan,det,logspace,roll,min,mean,cumsum,cumprod,diff,vectorize,lstsq,cla,eye,xlabel,ylabel,squeeze},
+emphstyle=[4]\color{numpycolour},
+%
+emph={[5]__init__,__add__,__mul__,__div__,__sub__,__call__,__getitem__,__setitem__,__eq__,__ne__,__nonzero__,__rmul__,__radd__,__repr__,__str__,__get__,__truediv__,__pow__,__name__,__future__,__all__},
+emphstyle=[5]\color{specmethodcolour},
+%
+emph={[6]assert,yield, range},
+emphstyle=[6]\color{keywordcolour}\bfseries,
+%
+literate=*%
+{:}{{\literatecolour:}}{1}%
+{=}{{\literatecolour=}}{1}%
+{-}{{\literatecolour-}}{1}%
+{+}{{\literatecolour+}}{1}%
+{*}{{\literatecolour*}}{1}%
+{**}{{\literatecolour{**}}}2%
+{/}{{\literatecolour/}}{1}%
+{//}{{\literatecolour{//}}}2%
+{!}{{\literatecolour!}}{1}%
+{<}{{\literatecolour<}}{1}%
+{>}{{\literatecolour>}}{1}%
+{>>>}{\pythonprompt}{3},
+frame=trbl,
+rulecolor=\color{black!50},
+backgroundcolor=\color{white!96!black},
+breakindent=.5\textwidth,frame=single,breaklines=true
+}
+
+\lstnewenvironment{python}[1][]{\lstset{style=mypython}}{}
