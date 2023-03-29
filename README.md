@@ -1,10 +1,11 @@
 # TUDelft Unofficial Templates
-This repository contains unofficial TU Delft templates for reports, assignments and summaries. These templates were created from the need for professional-looking, reusable LaTeX templates without unnecessary clutter. The main benefit of these templates are that they render much faster than the official templates and they do not contain any code that the average LaTeX user wouldn't be familiar with (no .sty files or internal TeX commands), meaning that the average LaTeX user can easily troubleshoot any potential errors that might occur.
+This repository contains unofficial TU Delft templates for reports, assignments, articles and summaries. These templates were created from the need for professional-looking, reusable LaTeX templates without unnecessary clutter. The main benefit of these templates are that they compile much faster than the official templates and they do not contain any code that the average LaTeX user wouldn't be familiar with (no .sty files or internal TeX commands), meaning that the average LaTeX user can easily troubleshoot any potential errors that might occur.
 
 ### Contents of this page
 - [Templates](#templates)
     + [The Report template](#the-report-template)
     + [The Assignment template](#the-assignment-template)
+    + [The Article template](#the-article-template)
     + [The Summary template](#the-summary-template)
 - [Usage](#usage)
 
@@ -24,6 +25,9 @@ The assignment template is intended to be used for smaller (individual) assignme
 Figures and tables are placed in the `Figures` folder. However, for an assignment with a large amount of tables a `Tables` folder may also be appropriate, since it is preferable to place the `\begin{tabular}...\end{tabular}` environment of large tables in a separate `.tex` file to prevent clutter. 
 
 ![](Assignment%20template/assignment-preview.png)
+
+### The Article template
+
 
 ### The Summary template
 The summary template is intended to be used for course summaries, but can also useful for taking lecture notes. The summary template offers special boxed environments, `\begin{FO}...\end{FO}` for Formulas and `\begin{WE}...\end{WE}` for Worked Examples (see the [example](Summary%20Template/Main.tex#L155)). Their respective primary and secondary colors can be changed in the [preamble](Summary%20Template/Main.tex#L12).
