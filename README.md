@@ -27,7 +27,12 @@ Figures and tables are placed in the `Figures` folder. However, for an assignmen
 ![](Assignment%20template/assignment-preview.png)
 
 ### The Article template
+The report article is intended to be used for scientific articles. It contains a header with room for up to 10 authors and a mentor, as well as the title and and abstract of the article. The template contains a bibliography in the AIAA style.
 
+Figures and tables are placed in the `Figures` folder. However, for a report with a large amount of tables a `Tables` folder may also be appropriate, since it is preferable to place the `\begin{tabular}...\end{tabular}` environment of large tables in a separate `.tex` file to prevent clutter. 
+For short articles, all the text may be written in `main.tex`. However, for long articles (15+ pages) it may be useful to create a separate `sections` folder for the `.tex` files for the indivdual sections, similarly to the [report template](#the-report-template).
+
+![](Article%20template/article-preview.png)
 
 ### The Summary template
 The summary template is intended to be used for course summaries, but can also useful for taking lecture notes. The summary template offers special boxed environments, `\begin{FO}...\end{FO}` for Formulas and `\begin{WE}...\end{WE}` for Worked Examples (see the [example](Summary%20Template/Main.tex#L155)). Their respective primary and secondary colors can be changed in the [preamble](Summary%20Template/Main.tex#L12).
